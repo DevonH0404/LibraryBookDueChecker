@@ -21,6 +21,7 @@ if ($_POST) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,23 +37,32 @@ if ($_POST) {
 </head>
 
 <body>
-    <h1>Return a Book</h1>
 
-    <?php
-    include('form.php');
-    ?>
+    <div class="container mt-5">
+        <div class="card mx-auto shadow-sm" style="max-width: 600px;">
+            <div class="card-body">
+                <h1 class="text-center mb-4">📚 Return a Book</h1>
+                <?php include('form.php'); ?>
+                <!-- If we have a date difference, display it -->
+                <?php if ($dateDifference != null) { ?>
+                    <hr>
 
-<!-- if we have data in date difference, display -->
-    <?php if ($dateDifference != null) { ?>
-
-    <!-- if overdue put in overdue message, else put in early message -->
-        <?php if ($dateSign == "+") { ?>
-            <p>The book is overdue by <?php echo $dateDifference; ?>.</p>
-        <?php } else { ?>
-            <p>The book was returned <?php echo $dateDifference; ?> early.</p>
-        <?php } ?>
-
-    <?php } ?>
+                    <!-- Display the appropriate message -->
+                    <?php if ($dateSign == "+") { ?>
+                        <p class="text-center text-danger">
+                           ❌  The book is overdue by
+                            <?php echo $dateDifference; ?>.
+                        </p>
+                    <?php } else { ?>
+                        <p class="text-center text-success">
+                            ✅ The book was returned
+                            <?php echo $dateDifference; ?> early.
+                        </p>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
